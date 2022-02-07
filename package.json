@@ -1,0 +1,25 @@
+{
+  "name": "shopping_cart_simple_demo",
+  "version": "1.0.0",
+  "description": "## Setup 1. Install [Node.js](https://nodejs.org/en/download/package-manager/) if you haven't already 2. Clone this repository 3. `cd` into the downloaded directory 4. `cd` into client and run `npm install` from the command line to install all dependencies 5. `cd` into server and run `npm install` from the command line to install all dependencies",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel start:client start:server",
+    "start:client": "cd client/ && npm run start",
+    "start:server": "cd server/ && npm run dev",
+    "build": "cd frontend/ && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iulspop/shopping_cart_simple_demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iulspop/shopping_cart_simple_demo/issues"
+  },
+  "homepage": "https://github.com/iulspop/shopping_cart_simple_demo#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

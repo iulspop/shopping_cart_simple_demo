@@ -1,20 +1,20 @@
-const EditProductForm = ({ toggleIsEdit }) => (
+const EditProductForm = ({ toggleIsEdit, title, price, quantity }) => (
   <div className="edit-form">
     <h3>Edit Product</h3>
     <form>
       <div className="input-group">
         <label htmlFor="product-name">Product Name</label>
-        <input type="text" id="product-name" value="Apple 10.5-Inch iPad Pro" />
+        <input type="text" id="product-name" value={title} />
       </div>
 
       <div className="input-group">
         <label htmlFor="product-price">Price</label>
-        <input type="text" id="product-price" value="649.99" />
+        <input type="text" id="product-price" value={price} />
       </div>
 
       <div className="input-group">
         <label htmlFor="product-quantity">Quantity</label>
-        <input type="text" id="product-quantity" value="2" />
+        <input type="text" id="product-quantity" value={quantity} />
       </div>
 
       <div className="actions form-actions">

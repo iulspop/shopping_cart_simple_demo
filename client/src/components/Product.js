@@ -15,7 +15,7 @@ const Product = ({ title, price, quantity }) => {
         <p className="price">${price}</p>
         <p className="quantity">{quantity} left in stock</p>
         {isEdit ? (
-          <EditProductForm toggleIsEdit={toggleIsEdit} />
+          <EditProductForm toggleIsEdit={toggleIsEdit} title={title} price={price} quantity={quantity} />
         ) : (
           <div className="actions product-actions">
             <a role="button" className="button add-to-cart">

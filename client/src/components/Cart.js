@@ -14,7 +14,7 @@ const Cart = ({ items }) => (
         </thead>
         <tbody>
           {items.map(item => (
-            <CartItem {...item} />
+            <CartItem key={item.id} {...item} />
           ))}
           <tr>
             <td colspan="3" class="total">

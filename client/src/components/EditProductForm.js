@@ -1,4 +1,4 @@
-const EditProductForm = () => (
+const EditProductForm = ({ toggleIsEdit }) => (
   <div className="edit-form">
     <h3>Edit Product</h3>
     <form>
@@ -21,7 +21,7 @@ const EditProductForm = () => (
         <a role="button" className="button">
           Update
         </a>
-        <a role="button" className="button">
+        <a role="button" className="button" onClick={toggleIsEdit}>
           Cancel
         </a>
       </div>

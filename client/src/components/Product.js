@@ -3,7 +3,6 @@ import EditProductForm from './EditProductForm'
 
 const Product = ({ title, price, quantity }) => {
   const [isEdit, setIsEdit] = useState(false)
-  const toggleIsEdit = () => (isEdit ? setIsEdit(false) : setIsEdit(true))
 
   return (
     <div className="product">
@@ -15,13 +14,13 @@ const Product = ({ title, price, quantity }) => {
         <p className="price">${price}</p>
         <p className="quantity">{quantity} left in stock</p>
         {isEdit ? (
-          <EditProductForm toggleIsEdit={toggleIsEdit} title={title} price={price} quantity={quantity} />
+          <EditProductForm cancelEdit={() => setIsEdit(false)} title={title} price={price} quantity={quantity} />
         ) : (
           <div className="actions product-actions">
             <a role="button" className="button add-to-cart">
               Add to Cart
             </a>
-            <a role="button" className="button edit" onClick={toggleIsEdit}>
+            <a role="button" className="button edit" onClick={() => setIsEdit(true)}>
               Edit
             </a>
           </div>

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import initialProductList from './data.js'
 
 import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
 const App = () => {
+  const [productList, _] = useState(initialProductList)
+
   return (
     <div id="app">
       <header>
@@ -13,7 +17,7 @@ const App = () => {
       </header>
 
       <main>
-        <ProductList />
+        <ProductList productList={productList} />
         <AddProductForm />
       </main>
     </div>
@@ -21,13 +25,3 @@ const App = () => {
 }
 
 export default App
-
-/*
-    App
-      Cart
-        CartItem
-      ProductList
-        Product
-          if edit => ProductEditForm
-      if add => AddProductForm
-*/

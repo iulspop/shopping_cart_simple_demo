@@ -1,17 +1,21 @@
 import EditProductForm from './EditProductForm'
 
-const Product = () => (
-  <div class="product">
-    <div class="product-details">
-      <a class="delete-button">
+const Product = ({ title, price, quantity }) => (
+  <div className="product">
+    <div className="product-details">
+      <a role="button" className="delete-button">
         <span>X</span>
       </a>
-      <h3>Amazon Kindle E-reader</h3>
-      <p class="price">$79.99</p>
-      <p class="quantity">5 left in stock</p>
-      <div class="actions product-actions">
-        <a class="button add-to-cart">Add to Cart</a>
-        <a class="button edit">Edit</a>
+      <h3>{title}</h3>
+      <p className="price">${price}</p>
+      <p className="quantity">{quantity} left in stock</p>
+      <div className="actions product-actions">
+        <a role="button" className="button add-to-cart">
+          Add to Cart
+        </a>
+        <a role="button" className="button edit">
+          Edit
+        </a>
       </div>
       <EditProductForm />
     </div>

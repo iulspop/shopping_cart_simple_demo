@@ -1,28 +1,34 @@
 const AddProductForm = () => (
-  <div class="add-form">
+  <div className="add-form">
     <p>
-      <a class="button add-product-button">Add A Product</a>
+      <a role="button" className="button add-product-button">
+        Add A Product
+      </a>
     </p>
     <h3>Add Product</h3>
     <form>
-      <div class="input-group">
-        <label for="product-name">Product Name</label>
+      <div className="input-group">
+        <label htmlFor="product-name">Product Name</label>
         <input type="text" id="product-name" value="" />
       </div>
 
-      <div class="input-group">
-        <label for="product-price">Price</label>
+      <div className="input-group">
+        <label htmlFor="product-price">Price</label>
         <input type="text" id="product-price" value="" />
       </div>
 
-      <div class="input-group">
-        <label for="product-quantity">Quantity</label>
+      <div className="input-group">
+        <label htmlFor="product-quantity">Quantity</label>
         <input type="text" id="product-quantity" value="" />
       </div>
 
-      <div class="actions form-actions">
-        <a class="button">Add</a>
-        <a class="button">Cancel</a>
+      <div className="actions form-actions">
+        <a role="button" className="button">
+          Add
+        </a>
+        <a role="button" className="button">
+          Cancel
+        </a>
       </div>
     </form>
   </div>

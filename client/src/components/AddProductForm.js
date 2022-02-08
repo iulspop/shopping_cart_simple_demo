@@ -31,9 +31,9 @@ const AddProductForm = ({ onAddProduct }) => {
   return (
     <div className={formIsVisible ? 'add-form visible' : 'add-form'}>
       <p>
-        <button className="button add-product-button" onClick={() => setFormIsVisible(true)}>
+        <a role="button" className="button add-product-button" onClick={() => setFormIsVisible(true)}>
           Add A Product
-        </button>
+        </a>
       </p>
       <h3>Add Product</h3>
       <form onSubmit={handleSubmit}>
@@ -58,10 +58,12 @@ const AddProductForm = ({ onAddProduct }) => {
         </div>
 
         <div className="actions form-actions">
-          <button className="button">Add</button>
-          <button className="button" onClick={clearForm}>
+          <a role="button" className="button">
+            Add
+          </a>
+          <a role="button" className="button" onClick={clearForm}>
             Cancel
-          </button>
+          </a>
         </div>
       </form>
     </div>

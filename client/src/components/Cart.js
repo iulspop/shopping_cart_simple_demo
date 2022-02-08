@@ -26,7 +26,9 @@ const Cart = ({ items }) => (
     ) : (
       <p>Your cart is empty</p>
     )}
-    <button className="button checkout disabled">Checkout</button>
+    <a role="button" className="button checkout disabled">
+      Checkout
+    </a>
   </div>
 )
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import EditProductForm from './EditProductForm'
 
-const Product = ({ _id, title, price, quantity, onDeleteProduct }) => {
+const Product = ({ _id, title, price, quantity, onDeleteProduct, onEditProduct }) => {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
@@ -14,7 +14,14 @@ const Product = ({ _id, title, price, quantity, onDeleteProduct }) => {
         <p className="price">${price}</p>
         <p className="quantity">{quantity} left in stock</p>
         {isEdit ? (
-          <EditProductForm cancelEdit={() => setIsEdit(false)} title={title} price={price} quantity={quantity} />
+          <EditProductForm
+            onCancelEdit={() => setIsEdit(false)}
+            id={_id}
+            title={title}
+            price={price}
+            quantity={quantity}
+            onEditProduct={onEditProduct}
+          />
         ) : (
           <div className="actions product-actions">
             <button className="button add-to-cart">Add to Cart</button>

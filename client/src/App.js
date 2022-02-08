@@ -34,6 +34,15 @@ const App = () => {
     }
   }
 
+  const handleEditProduct = async (id, edits, cleanup = () => {}) => {
+    const response = await axios.put(`/api/products/${id}`, edits)
+
+    if (response.status === 200) {
+      setProductList(productList.map(product => (product._id === id ? response.data : product)))
+      cleanup()
+    }
+  }
+
   return (
     <div id="app">
       <header>
@@ -42,7 +51,11 @@ const App = () => {
       </header>
 
       <main>
-        <ProductList productList={productList} onDeleteProduct={handleDeleteProduct} />
+        <ProductList
+          productList={productList}
+          onDeleteProduct={handleDeleteProduct}
+          onEditProduct={handleEditProduct}
+        />
         <AddProductForm onAddProduct={handleAddProduct} />
       </main>
     </div>

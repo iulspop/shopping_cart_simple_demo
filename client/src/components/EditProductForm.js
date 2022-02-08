@@ -18,12 +18,10 @@ const EditProductForm = ({ cancelEdit, title, price, quantity }) => (
       </div>
 
       <div className="actions form-actions">
-        <a href="/#" className="button">
-          Update
-        </a>
-        <a href="/#" className="button" onClick={cancelEdit}>
+        <button className="button">Update</button>
+        <button className="button" onClick={cancelEdit}>
           Cancel
-        </a>
+        </button>
       </div>
     </form>
   </div>

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import axios from 'axios'
 
 const AddProductForm = ({ onAddProduct }) => {
   const [formIsVisible, setFormIsVisible] = useState(false)

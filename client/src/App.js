@@ -17,6 +17,8 @@ const App = () => {
     getAll()
   }, [])
 
+  const handleAddProduct = product => setProductList([...productList, product])
+
   return (
     <div id="app">
       <header>
@@ -26,7 +28,7 @@ const App = () => {
 
       <main>
         <ProductList productList={productList} />
-        <AddProductForm />
+        <AddProductForm onAddProduct={handleAddProduct} />
       </main>
     </div>
   )

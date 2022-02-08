@@ -1,7 +1,36 @@
 import { useState } from 'react'
+import axios from 'axios'
 
-const AddProductForm = () => {
+const AddProductForm = ({ onAddProduct }) => {
   const [formIsVisible, setFormIsVisible] = useState(false)
+
+  const [productName, setProductName] = useState('')
+  const [productPrice, setProductPrice] = useState('')
+  const [productQuantity, setProductQuantity] = useState('')
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    const newProduct = {
+      title: productName,
+      price: productPrice,
+      quantity: productQuantity,
+    }
+
+    const response = await axios.post('/api/products', newProduct)
+
+    if (response.status === 200) {
+      onAddProduct(newProduct)
+      clearForm()
+    }
+  }
+
+  const clearForm = () => {
+    setProductName('')
+    setProductPrice('')
+    setProductQuantity('')
+    setFormIsVisible(false)
+  }
 
   return (
     <div className={formIsVisible ? 'add-form visible' : 'add-form'}>
@@ -11,20 +40,25 @@ const AddProductForm = () => {
         </button>
       </p>
       <h3>Add Product</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="input-group">
           <label htmlFor="product-name">Product Name</label>
-          <input type="text" id="product-name" value="" />
+          <input type="text" onChange={e => setProductName(e.target.value)} id="product-name" value={productName} />
         </div>
 
         <div className="input-group">
           <label htmlFor="product-price">Price</label>
-          <input type="text" id="product-price" value="" />
+          <input type="text" onChange={e => setProductPrice(e.target.value)} id="product-price" value={productPrice} />
         </div>
 
         <div className="input-group">
           <label htmlFor="product-quantity">Quantity</label>
-          <input type="text" id="product-quantity" value="" />
+          <input
+            type="text"
+            onChange={e => setProductQuantity(e.target.value)}
+            id="product-quantity"
+            value={productQuantity}
+          />
         </div>
 
         <div className="actions form-actions">

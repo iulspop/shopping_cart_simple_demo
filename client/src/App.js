@@ -26,6 +26,14 @@ const App = () => {
     }
   }
 
+  const handleDeleteProduct = async productID => {
+    const response = await axios.delete(`/api/products/${productID}`)
+
+    if (response.status === 200) {
+      setProductList(productList.filter(product => product._id != productID))
+    }
+  }
+
   return (
     <div id="app">
       <header>
@@ -34,7 +42,7 @@ const App = () => {
       </header>
 
       <main>
-        <ProductList productList={productList} />
+        <ProductList productList={productList} onDeleteProduct={handleDeleteProduct} />
         <AddProductForm onAddProduct={handleAddProduct} />
       </main>
     </div>
@@ -52,7 +60,7 @@ Product
   CREATE
 - submit edit form, edits product
   UPDATE
-- click X button on product, deletes product
+- click X button on product, deletes product X
   DELETE
 
 Cart

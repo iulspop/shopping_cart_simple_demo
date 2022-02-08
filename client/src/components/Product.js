@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import EditProductForm from './EditProductForm'
 
-const Product = ({ title, price, quantity }) => {
+const Product = ({ _id, title, price, quantity, onDeleteProduct }) => {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
     <div className="product">
       <div className="product-details">
-        <button className="delete-button">
+        <button className="delete-button" onClick={() => onDeleteProduct(_id)}>
           <span>X</span>
         </button>
         <h3>{title}</h3>

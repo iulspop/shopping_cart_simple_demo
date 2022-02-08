@@ -30,7 +30,7 @@ const App = () => {
     const response = await axios.delete(`/api/products/${productID}`)
 
     if (response.status === 200) {
-      setProductList(productList.filter(product => product._id != productID))
+      setProductList(productList.filter(product => product._id !== productID))
     }
   }
 
@@ -42,6 +42,8 @@ const App = () => {
       cleanup()
     }
   }
+
+  useEffect(() => axios.get('/api/cart').then(response => setCartItems(response.data)), [])
 
   return (
     <div id="app">
@@ -71,13 +73,13 @@ Product
   READ
 - submit add product form, adds a product X
   CREATE
-- submit edit form, edits product
+- submit edit form, edits product X
   UPDATE
 - click X button on product, deletes product X
   DELETE
 
 Cart
-- does it load cart items
+- does it load cart items X
 - click add to cart, adds cart item
   - updates quantity in product list and cart
 - click checkout, clear cart

@@ -56,3 +56,14 @@ content-type: application/json
   "quantity": 4,
   "price": 99.99
 }
+
+###
+GET http://localhost:3001/api/cart HTTP/1.1
+
+###
+POST http://localhost:3001/api/add-to-cart HTTP/1.1
+content-type: application/json
+
+{
+  "productId": "6202bcc6cee6f53cf35dcc44"
+}

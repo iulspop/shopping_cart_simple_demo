@@ -7,7 +7,7 @@ const Product = ({ title, price, quantity }) => {
   return (
     <div className="product">
       <div className="product-details">
-        <a role="button" className="delete-button">
+        <a href="/#" className="delete-button">
           <span>X</span>
         </a>
         <h3>{title}</h3>
@@ -17,10 +17,10 @@ const Product = ({ title, price, quantity }) => {
           <EditProductForm cancelEdit={() => setIsEdit(false)} title={title} price={price} quantity={quantity} />
         ) : (
           <div className="actions product-actions">
-            <a role="button" className="button add-to-cart">
+            <a href="/#" className="button add-to-cart">
               Add to Cart
             </a>
-            <a role="button" className="button edit" onClick={() => setIsEdit(true)}>
+            <a href="/#" className="button edit" onClick={() => setIsEdit(true)}>
               Edit
             </a>
           </div>

@@ -11,18 +11,14 @@ const AddProductForm = ({ onAddProduct }) => {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    const newProduct = {
-      title: productName,
-      price: productPrice,
-      quantity: productQuantity,
-    }
-
-    const response = await axios.post('/api/products', newProduct)
-
-    if (response.status === 200) {
-      onAddProduct(newProduct)
-      clearForm()
-    }
+    onAddProduct(
+      {
+        title: productName,
+        price: productPrice,
+        quantity: productQuantity,
+      },
+      clearForm
+    )
   }
 
   const clearForm = () => {
@@ -63,7 +59,7 @@ const AddProductForm = ({ onAddProduct }) => {
 
         <div className="actions form-actions">
           <button className="button">Add</button>
-          <button className="button" onClick={() => setFormIsVisible(false)}>
+          <button className="button" onClick={clearForm}>
             Cancel
           </button>
         </div>

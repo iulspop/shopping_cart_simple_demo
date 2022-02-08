@@ -17,7 +17,14 @@ const App = () => {
     getAll()
   }, [])
 
-  const handleAddProduct = product => setProductList([...productList, product])
+  const handleAddProduct = async (newProduct, cleanup = () => {}) => {
+    const response = await axios.post('/api/products', newProduct)
+
+    if (response.status === 200) {
+      setProductList([...productList, response.data])
+      cleanup()
+    }
+  }
 
   return (
     <div id="app">
@@ -41,7 +48,7 @@ export default App
 Product
 - does it load product list X
   READ
-- submit add product form, adds a product
+- submit add product form, adds a product X
   CREATE
 - submit edit form, edits product
   UPDATE

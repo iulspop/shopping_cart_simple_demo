@@ -1,18 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+
 import App from './App'
 
-function setup(component) {
-  return {
-    user: userEvent.setup(),
-    ...render(component),
-  }
-}
+test('loads product list on render', async () => {
+  render(<App />)
 
-test('App', () => {
-  const { user } = setup(<App />)
-
-  screen.getByText()
-  user.click()
-  expect().to
+  expect(await screen.findByText('Amazon Kindle E-reader')).toBeInTheDocument()
+  expect(await screen.findByText('Apple 10.5-Inch iPad Pro')).toBeInTheDocument()
 })

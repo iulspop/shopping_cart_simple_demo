@@ -1,6 +1,6 @@
 import CartItem from './CartItem'
 
-const Cart = ({ items }) => (
+const Cart = ({ items, onCheckoutCart }) => (
   <div className="cart">
     <h2>Your Cart</h2>
     {items.length > 0 ? (
@@ -26,7 +26,15 @@ const Cart = ({ items }) => (
     ) : (
       <p>Your cart is empty</p>
     )}
-    <button className="button checkout disabled">Checkout</button>
+    {items.length > 0 ? (
+      <button className="button checkout" onClick={onCheckoutCart}>
+        Checkout
+      </button>
+    ) : (
+      <button className="button checkout disabled" disabled>
+        Checkout
+      </button>
+    )}
   </div>
 )
 

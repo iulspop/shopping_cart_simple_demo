@@ -60,11 +60,19 @@ const App = () => {
     }
   }
 
+  const handleCheckoutCart = async () => {
+    let response = await axios.post('/api/checkout')
+
+    if (response.status === 200) {
+      setCartItems([])
+    }
+  }
+
   return (
     <div id="app">
       <header>
         <h1>The Shop!</h1>
-        <Cart items={cartItems} />
+        <Cart items={cartItems} onCheckoutCart={handleCheckoutCart} />
       </header>
 
       <main>

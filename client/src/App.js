@@ -17,6 +17,8 @@ const App = () => {
     getAll()
   }, [])
 
+  useEffect(() => void axios.get('/api/cart').then(response => setCartItems(response.data)), [])
+
   const handleAddProduct = async (newProduct, cleanup = () => {}) => {
     const response = await axios.post('/api/products', newProduct)
 
@@ -43,7 +45,20 @@ const App = () => {
     }
   }
 
-  useEffect(() => axios.get('/api/cart').then(response => setCartItems(response.data)), [])
+  const handleAddToCart = async id => {
+    let response = await axios.post('/api/add-to-cart/', { productId: id })
+
+    if (response.status === 200) {
+      const { product: newProduct, item: newItem } = response.data
+      setProductList(productList.map(product => (product._id === newProduct._id ? newProduct : product)))
+
+      if (cartItems.some(item => item._id === newItem._id)) {
+        setCartItems(cartItems.map(item => (item._id === newItem._id ? newItem : item)))
+      } else {
+        setCartItems([...cartItems, newItem])
+      }
+    }
+  }
 
   return (
     <div id="app">
@@ -57,6 +72,7 @@ const App = () => {
           productList={productList}
           onDeleteProduct={handleDeleteProduct}
           onEditProduct={handleEditProduct}
+          onAddToCart={handleAddToCart}
         />
         <AddProductForm onAddProduct={handleAddProduct} />
       </main>
@@ -83,5 +99,8 @@ Cart
 - click add to cart, adds cart item
   - updates quantity in product list and cart
 - click checkout, clear cart
+
+Other
+- when product quantity is 0, disable button and turn text red
 
 */

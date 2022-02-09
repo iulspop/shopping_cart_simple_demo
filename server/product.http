@@ -51,10 +51,9 @@ POST http://localhost:3001/api/products HTTP/1.1
 content-type: application/json
 
 {
-  "id": 5,
-  "title": "Turtle Ninja",
-  "quantity": 4,
-  "price": 99.99
+  "title": "Red Ducky",
+  "quantity": 0,
+  "price": 99999.99
 }
 
 ###

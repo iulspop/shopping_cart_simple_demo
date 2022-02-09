@@ -4,7 +4,7 @@ const Cart = ({ items }) => (
   <div className="cart">
     <h2>Your Cart</h2>
     {items.length > 0 ? (
-      <table class="cart-items">
+      <table className="cart-items">
         <thead>
           <tr>
             <th>Item</th>
@@ -14,10 +14,10 @@ const Cart = ({ items }) => (
         </thead>
         <tbody>
           {items.map(item => (
-            <CartItem key={item.id} {...item} />
+            <CartItem key={item._id} {...item} />
           ))}
           <tr>
-            <td colspan="3" class="total">
+            <td colSpan="3" className="total">
               Total: ${items.reduce((sum, item) => sum + item.quantity * item.price, 0)}
             </td>
           </tr>

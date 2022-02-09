@@ -96,11 +96,9 @@ Product
 
 Cart
 - does it load cart items X
-- click add to cart, adds cart item
+- click add to cart, adds cart item X
   - updates quantity in product list and cart
+  - when product quantity is 0, disable button and turn text red
 - click checkout, clear cart
-
-Other
-- when product quantity is 0, disable button and turn text red
 
 */

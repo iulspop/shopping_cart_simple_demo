@@ -12,7 +12,7 @@ const Product = ({ _id, title, price, quantity, onDeleteProduct, onEditProduct, 
         </button>
         <h3>{title}</h3>
         <p className="price">${price}</p>
-        <p className="quantity">{quantity} left in stock</p>
+        <p className={quantity > 0 ? 'quantity' : 'quantity none-left'}>{quantity} left in stock</p>
         {isEdit ? (
           <EditProductForm
             onCancelEdit={() => setIsEdit(false)}

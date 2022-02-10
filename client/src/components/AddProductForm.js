@@ -1,16 +1,30 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
 
-const AddProductForm = ({ onAddProduct }) => {
+import { productAdded } from '../redux/actions/productAction'
+
+const AddProductForm = () => {
+  const dispatch = useDispatch()
   const [formIsVisible, setFormIsVisible] = useState(false)
 
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState('')
   const [productQuantity, setProductQuantity] = useState('')
 
+  const handleAddProduct = async (newProduct, cleanup = () => {}) => {
+    const response = await axios.post('/api/products', newProduct)
+
+    if (response.status === 200) {
+      dispatch(productAdded(response.data))
+      cleanup()
+    }
+  }
+
   const handleSubmit = async e => {
     e.preventDefault()
 
-    onAddProduct(
+    handleAddProduct(
       {
         title: productName,
         price: productPrice,

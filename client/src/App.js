@@ -6,7 +6,7 @@ import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
-import { productsReceived, productAdded, productEdited, productDeleted } from './redux/actions/productAction'
+import { productsReceived } from './redux/actions/productAction'
 import { cartItemsReceived, cartCheckout, cartItemAdded } from './redux/actions/cartItemsAction'
 
 const App = () => {
@@ -24,25 +24,6 @@ const App = () => {
   }, [dispatch])
 
   useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
-
-  const handleAddProduct = async (newProduct, cleanup = () => {}) => {
-    const response = await axios.post('/api/products', newProduct)
-
-    if (response.status === 200) {
-      dispatch(productAdded(response.data))
-      cleanup()
-    }
-  }
-
-  const handleDeleteProduct = async productID => {
-    const response = await axios.delete(`/api/products/${productID}`)
-
-    if (response.status === 200) {
-      dispatch(productDeleted(productID))
-    }
-  }
-
-
 
   const handleAddToCart = async id => {
     let response = await axios.post('/api/add-to-cart/', { productId: id })
@@ -68,12 +49,8 @@ const App = () => {
       </header>
 
       <main>
-        <ProductList
-          productList={products}
-          onDeleteProduct={handleDeleteProduct}
-          onAddToCart={handleAddToCart}
-        />
-        <AddProductForm onAddProduct={handleAddProduct} />
+        <ProductList productList={products} onAddToCart={handleAddToCart} />
+        <AddProductForm />
       </main>
     </div>
   )

@@ -1,13 +1,28 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
+
+import { productDeleted } from '../redux/actions/productAction'
+
 import EditProductForm from './EditProductForm'
 
-const Product = ({ _id, title, price, quantity, onDeleteProduct, onAddToCart }) => {
+const Product = ({ _id, title, price, quantity, onAddToCart }) => {
+  const dispatch = useDispatch()
+
   const [isEdit, setIsEdit] = useState(false)
+
+  const handleDeleteProduct = async productID => {
+    const response = await axios.delete(`/api/products/${productID}`)
+
+    if (response.status === 200) {
+      dispatch(productDeleted(productID))
+    }
+  }
 
   return (
     <div className="product">
       <div className="product-details">
-        <button className="delete-button" onClick={() => onDeleteProduct(_id)}>
+        <button className="delete-button" onClick={() => handleDeleteProduct(_id)}>
           <span>X</span>
         </button>
         <h3>{title}</h3>

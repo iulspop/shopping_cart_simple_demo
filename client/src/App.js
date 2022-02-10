@@ -25,19 +25,11 @@ const App = () => {
 
   useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
 
-  const handleCheckoutCart = async () => {
-    let response = await axios.post('/api/checkout')
-
-    if (response.status === 200) {
-      dispatch(cartCheckout())
-    }
-  }
-
   return (
     <div id="app">
       <header>
         <h1>The Shop!</h1>
-        <Cart items={cartItems} onCheckoutCart={handleCheckoutCart} />
+        <Cart items={cartItems} />
       </header>
 
       <main>

@@ -6,7 +6,7 @@ import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
-import { productsReceived, productEdited } from './actions/productActions'
+import { productsReceived, productAdded, productEdited, productDeleted } from './actions/productActions'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const App = () => {
     const response = await axios.post('/api/products', newProduct)
 
     if (response.status === 200) {
-      setProductList([...productList, response.data])
+      dispatch(productAdded(response.data))
       cleanup()
     }
   }
@@ -38,7 +38,7 @@ const App = () => {
     const response = await axios.delete(`/api/products/${productID}`)
 
     if (response.status === 200) {
-      setProductList(productList.filter(product => product._id !== productID))
+      dispatch(productDeleted(productID))
     }
   }
 

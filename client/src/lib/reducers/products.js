@@ -3,9 +3,16 @@ const products = (state = [], action) => {
     case 'PRODUCTS_RECEIVED': {
       return action.payload.products
     }
+    case 'PRODUCT_ADDED': {
+      return [...state, action.payload.product]
+    }
     case 'PRODUCT_EDITED': {
       const updatedProduct = action.payload.product
       return state.map(product => (product._id === updatedProduct._id ? updatedProduct : product))
+    }
+    case 'PRODUCT_DELETED': {
+      const productID = action.payload.productID
+      return state.filter(product => product._id !== productID)
     }
     default: {
       return state

@@ -6,10 +6,10 @@ export const productAdded = product => {
   return { type: 'PRODUCT_ADDED', payload: { product } }
 }
 
-export const productDeleted = id => {
-  return { type: 'PRODUCT_DELETED', payload: { id } }
+export const productDeleted = productID => {
+  return { type: 'PRODUCT_DELETED', payload: { productID } }
 }
 
 export const productEdited = product => {
-    return { type: 'PRODUCT_EDITED', payload: { product }}
+  return { type: 'PRODUCT_EDITED', payload: { product } }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import EditProductForm from './EditProductForm'
 
-const Product = ({ _id, title, price, quantity, onDeleteProduct, onEditProduct, onAddToCart }) => {
+const Product = ({ _id, title, price, quantity, onDeleteProduct, onAddToCart }) => {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
@@ -20,7 +20,6 @@ const Product = ({ _id, title, price, quantity, onDeleteProduct, onEditProduct, 
             title={title}
             price={price}
             quantity={quantity}
-            onEditProduct={onEditProduct}
           />
         ) : (
           <div className="actions product-actions">

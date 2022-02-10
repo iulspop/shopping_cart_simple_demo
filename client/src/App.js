@@ -42,14 +42,7 @@ const App = () => {
     }
   }
 
-  const handleEditProduct = async (id, edits, cleanup = () => {}) => {
-    const response = await axios.put(`/api/products/${id}`, edits)
 
-    if (response.status === 200) {
-      dispatch(productEdited(response.data))
-      cleanup()
-    }
-  }
 
   const handleAddToCart = async id => {
     let response = await axios.post('/api/add-to-cart/', { productId: id })
@@ -78,7 +71,6 @@ const App = () => {
         <ProductList
           productList={products}
           onDeleteProduct={handleDeleteProduct}
-          onEditProduct={handleEditProduct}
           onAddToCart={handleAddToCart}
         />
         <AddProductForm onAddProduct={handleAddProduct} />

@@ -1,6 +1,6 @@
 import Product from './Product'
 
-const ProductList = ({ productList, onDeleteProduct, onEditProduct, onAddToCart }) => (
+const ProductList = ({ productList, onDeleteProduct, onAddToCart }) => (
   <div className="product-listing">
     <h2>Products</h2>
     {productList.map(product => (
@@ -8,7 +8,6 @@ const ProductList = ({ productList, onDeleteProduct, onEditProduct, onAddToCart 
         key={product._id}
         {...product}
         onDeleteProduct={onDeleteProduct}
-        onEditProduct={onEditProduct}
         onAddToCart={onAddToCart}
       />
     ))}

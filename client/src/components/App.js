@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
-import Cart from './components/Cart'
-import ProductList from './components/ProductList'
-import AddProductForm from './components/AddProductForm'
+import Cart from './Cart'
+import ProductList from './ProductList'
+import AddProductForm from './AddProductForm'
 
-import { productsReceived } from './redux/actions/productAction'
-import { cartItemsReceived } from './redux/actions/cartItemsAction'
+import { productsReceived } from '../redux/actions/productAction'
+import { cartItemsReceived } from '../redux/actions/cartItemsAction'
 
 const App = () => {
   const dispatch = useDispatch()

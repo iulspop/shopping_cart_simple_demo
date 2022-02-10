@@ -7,7 +7,7 @@ import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
 import { productsReceived } from './redux/actions/productAction'
-import { cartItemsReceived, cartCheckout } from './redux/actions/cartItemsAction'
+import { cartItemsReceived } from './redux/actions/cartItemsAction'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -15,14 +15,10 @@ const App = () => {
   const products = useSelector(state => state.products)
   const cartItems = useSelector(state => state.cartItems)
 
-  useEffect(() => {
-    const getAll = async () => {
-      const response = await axios.get('/api/products')
-      dispatch(productsReceived(response.data))
-    }
-    getAll()
-  }, [dispatch])
-
+  useEffect(
+    () => void axios.get('/api/products').then(response => dispatch(productsReceived(response.data))),
+    [dispatch]
+  )
   useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
 
   return (

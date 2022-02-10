@@ -6,8 +6,8 @@ import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
-import { productsReceived, productAdded, productEdited, productDeleted } from './actions/productActions'
-import { cartItemsReceived, cartCheckout, cartItemAdded } from './actions/cartActions'
+import { productsReceived, productAdded, productEdited, productDeleted } from './redux/actions/productAction'
+import { cartItemsReceived, cartCheckout, cartItemAdded } from './redux/actions/cartItemsAction'
 
 const App = () => {
   const dispatch = useDispatch()

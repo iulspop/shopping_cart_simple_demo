@@ -7,7 +7,7 @@ import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
 import { productsReceived } from './redux/actions/productAction'
-import { cartItemsReceived, cartCheckout, cartItemAdded } from './redux/actions/cartItemsAction'
+import { cartItemsReceived, cartCheckout } from './redux/actions/cartItemsAction'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -25,14 +25,6 @@ const App = () => {
 
   useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
 
-  const handleAddToCart = async id => {
-    let response = await axios.post('/api/add-to-cart/', { productId: id })
-
-    if (response.status === 200) {
-      dispatch(cartItemAdded(response.data))
-    }
-  }
-
   const handleCheckoutCart = async () => {
     let response = await axios.post('/api/checkout')
 
@@ -49,7 +41,7 @@ const App = () => {
       </header>
 
       <main>
-        <ProductList productList={products} onAddToCart={handleAddToCart} />
+        <ProductList productList={products} />
         <AddProductForm />
       </main>
     </div>

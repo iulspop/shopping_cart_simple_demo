@@ -6,7 +6,7 @@ import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
-import { productsReceived } from './actions/productActions'
+import { productsReceived, productEdited } from './actions/productActions'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -46,7 +46,7 @@ const App = () => {
     const response = await axios.put(`/api/products/${id}`, edits)
 
     if (response.status === 200) {
-      setProductList(productList.map(product => (product._id === id ? response.data : product)))
+      dispatch(productEdited(response.data))
       cleanup()
     }
   }

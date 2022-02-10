@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
 import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
+import { productsReceived } from './actions/productActions'
+
 const App = () => {
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.products)
+
   const [productList, setProductList] = useState([])
   const [cartItems, setCartItems] = useState([])
 
   useEffect(() => {
     const getAll = async () => {
       const response = await axios.get('/api/products')
-      setProductList(response.data)
+      dispatch(productsReceived(response.data))
     }
     getAll()
-  }, [])
+  }, [dispatch])
 
   useEffect(() => void axios.get('/api/cart').then(response => setCartItems(response.data)), [])
 
@@ -77,7 +83,7 @@ const App = () => {
 
       <main>
         <ProductList
-          productList={productList}
+          productList={products}
           onDeleteProduct={handleDeleteProduct}
           onEditProduct={handleEditProduct}
           onAddToCart={handleAddToCart}
@@ -91,7 +97,16 @@ const App = () => {
 export default App
 
 /*
+x Create a store
+x Create a provider
+x Create a root reducer
+- In each component we select the properties we need using useSelector
+- In each component where actions are created, dispatch those actions
+- Write action creators
+- Factor out individual reducers
+*/
 
+/*
 Product
 - does it load product list X
   READ

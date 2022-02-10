@@ -14,6 +14,10 @@ const products = (state = [], action) => {
       const productID = action.payload.productID
       return state.filter(product => product._id !== productID)
     }
+    case 'CART_ITEM_ADDED': {
+      const newProduct = action.payload.product
+      return state.map(product => (product._id === newProduct._id ? newProduct : product))
+    }
     default: {
       return state
     }

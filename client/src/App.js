@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 
@@ -7,13 +7,13 @@ import ProductList from './components/ProductList'
 import AddProductForm from './components/AddProductForm'
 
 import { productsReceived, productAdded, productEdited, productDeleted } from './actions/productActions'
+import { cartItemsReceived, cartCheckout, cartItemAdded } from './actions/cartActions'
 
 const App = () => {
   const dispatch = useDispatch()
-  const products = useSelector(state => state.products)
 
-  const [productList, setProductList] = useState([])
-  const [cartItems, setCartItems] = useState([])
+  const products = useSelector(state => state.products)
+  const cartItems = useSelector(state => state.cartItems)
 
   useEffect(() => {
     const getAll = async () => {
@@ -23,7 +23,7 @@ const App = () => {
     getAll()
   }, [dispatch])
 
-  useEffect(() => void axios.get('/api/cart').then(response => setCartItems(response.data)), [])
+  useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
 
   const handleAddProduct = async (newProduct, cleanup = () => {}) => {
     const response = await axios.post('/api/products', newProduct)
@@ -55,14 +55,7 @@ const App = () => {
     let response = await axios.post('/api/add-to-cart/', { productId: id })
 
     if (response.status === 200) {
-      const { product: newProduct, item: newItem } = response.data
-      setProductList(productList.map(product => (product._id === newProduct._id ? newProduct : product)))
-
-      if (cartItems.some(item => item._id === newItem._id)) {
-        setCartItems(cartItems.map(item => (item._id === newItem._id ? newItem : item)))
-      } else {
-        setCartItems([...cartItems, newItem])
-      }
+      dispatch(cartItemAdded(response.data))
     }
   }
 
@@ -70,7 +63,7 @@ const App = () => {
     let response = await axios.post('/api/checkout')
 
     if (response.status === 200) {
-      setCartItems([])
+      dispatch(cartCheckout())
     }
   }
 

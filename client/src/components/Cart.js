@@ -1,23 +1,17 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
 
-import { cartCheckout, cartItemsReceived } from '../redux/actions/cartItemsAction'
+import { cartItemsReceived, cartCheckout } from '../redux/actions/cartItemsAction'
 
 import CartItem from './CartItem'
 
 const Cart = () => {
   const dispatch = useDispatch()
+
   const items = useSelector(state => state.cartItems)
-  useEffect(() => void axios.get('/api/cart').then(response => dispatch(cartItemsReceived(response.data))), [dispatch])
+  useEffect(() => dispatch(cartItemsReceived()), [dispatch])
 
-  const handleCheckoutCart = async () => {
-    let response = await axios.post('/api/checkout')
-
-    if (response.status === 200) {
-      dispatch(cartCheckout())
-    }
-  }
+  const handleCheckoutCart = () => dispatch(cartCheckout())
 
   return (
     <div className="cart">

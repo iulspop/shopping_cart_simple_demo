@@ -8,14 +8,28 @@ export const productsReceived = () => {
   }
 }
 
-export const productAdded = product => {
-  return { type: 'PRODUCT_ADDED', payload: { product } }
+export const productAdded = (product, cleanup) => {
+  return dispatch => {
+    productsAPI.addProduct(product, updatedProduct => {
+      dispatch({ type: 'PRODUCT_ADDED', payload: { product: updatedProduct } })
+      cleanup()
+    })
+  }
 }
 
 export const productDeleted = productID => {
-  return { type: 'PRODUCT_DELETED', payload: { productID } }
+  return dispatch => {
+    productsAPI.deleteProduct(productID, () => {
+      dispatch({ type: 'PRODUCT_DELETED', payload: { productID } })
+    })
+  }
 }
 
-export const productEdited = product => {
-  return { type: 'PRODUCT_EDITED', payload: { product } }
+export const productEdited = (id, edits, cleanup) => {
+  return dispatch => {
+    productsAPI.updateProduct(id, edits, updatedProduct => {
+      dispatch({ type: 'PRODUCT_EDITED', payload: { product: updatedProduct } })
+      cleanup()
+    })
+  }
 }

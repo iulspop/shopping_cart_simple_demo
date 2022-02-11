@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import axios from 'axios'
 
 import { productEdited } from '../redux/actions/productAction'
 
@@ -11,13 +10,8 @@ const EditProductForm = ({ onCancelEdit, id, title, price, quantity }) => {
   const [productPrice, setProductPrice] = useState(price)
   const [productQuantity, setProductQuantity] = useState(quantity)
 
-  const handleEditProduct = async (id, edits, cleanup = () => {}) => {
-    const response = await axios.put(`/api/products/${id}`, edits)
-
-    if (response.status === 200) {
-      dispatch(productEdited(response.data))
-      cleanup()
-    }
+  const handleEditProduct = (id, edits, cleanup = () => {}) => {
+    dispatch(productEdited(id, edits, cleanup))
   }
 
   const handleSubmit = async e => {

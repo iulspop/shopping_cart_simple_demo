@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import axios from 'axios'
 
 import { productDeleted } from '../redux/actions/productAction'
 import { cartItemAdded } from '../redux/actions/cartItemsAction'
@@ -13,20 +12,10 @@ const Product = ({ _id, title, price, quantity }) => {
   const [isEdit, setIsEdit] = useState(false)
 
   const handleDeleteProduct = async productID => {
-    const response = await axios.delete(`/api/products/${productID}`)
-
-    if (response.status === 200) {
-      dispatch(productDeleted(productID))
-    }
+    dispatch(productDeleted(productID))
   }
 
-  const handleAddToCart = async id => {
-    let response = await axios.post('/api/add-to-cart/', { productId: id })
-
-    if (response.status === 200) {
-      dispatch(cartItemAdded(response.data))
-    }
-  }
+  const handleAddToCart = id => dispatch(cartItemAdded(id))
 
   return (
     <div className="product">

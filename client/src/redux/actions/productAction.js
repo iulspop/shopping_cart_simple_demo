@@ -1,5 +1,11 @@
-export const productsReceived = products => {
-  return { type: 'PRODUCTS_RECEIVED', payload: { products } }
+import { productsAPI } from '../../api'
+
+export const productsReceived = () => {
+  return dispatch => {
+    productsAPI.getProducts(products => {
+      dispatch({ type: 'PRODUCTS_RECEIVED', payload: { products } })
+    })
+  }
 }
 
 export const productAdded = product => {

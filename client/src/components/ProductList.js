@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
 
 import { productsReceived } from '../redux/actions/productAction'
 
@@ -11,10 +10,7 @@ const ProductList = () => {
 
   const productList = useSelector(state => state.products)
 
-  useEffect(
-    () => void axios.get('/api/products').then(response => dispatch(productsReceived(response.data))),
-    [dispatch]
-  )
+  useEffect(() => dispatch(productsReceived()), [dispatch])
 
   return (
     <div className="product-listing">

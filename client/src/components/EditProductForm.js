@@ -10,21 +10,19 @@ const EditProductForm = ({ onCancelEdit, id, title, price, quantity }) => {
   const [productPrice, setProductPrice] = useState(price)
   const [productQuantity, setProductQuantity] = useState(quantity)
 
-  const handleEditProduct = (id, edits, cleanup = () => {}) => {
-    dispatch(productEdited(id, edits, cleanup))
-  }
-
   const handleSubmit = async e => {
     e.preventDefault()
 
-    handleEditProduct(
-      id,
-      {
-        title: productName,
-        price: productPrice,
-        quantity: productQuantity,
-      },
-      onCancelEdit
+    dispatch(
+      productEdited(
+        id,
+        {
+          title: productName,
+          price: productPrice,
+          quantity: productQuantity,
+        },
+        onCancelEdit
+      )
     )
   }
 

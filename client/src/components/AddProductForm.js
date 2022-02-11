@@ -11,20 +11,18 @@ const AddProductForm = () => {
   const [productPrice, setProductPrice] = useState('')
   const [productQuantity, setProductQuantity] = useState('')
 
-  const handleAddProduct = (newProduct, cleanup = () => {}) => {
-    dispatch(productAdded(newProduct, cleanup))
-  }
-
   const handleSubmit = async e => {
     e.preventDefault()
 
-    handleAddProduct(
-      {
-        title: productName,
-        price: productPrice,
-        quantity: productQuantity,
-      },
-      clearForm
+    dispatch(
+      productAdded(
+        {
+          title: productName,
+          price: productPrice,
+          quantity: productQuantity,
+        },
+        clearForm
+      )
     )
   }
 

@@ -1,17 +1,15 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { cartItemsReceived, cartCheckout } from '../redux/actions/cartItemsAction'
+import { useEffect, useContext } from 'react'
 
 import CartItem from './CartItem'
 
+import { CartItemsContext, actions } from '../context/cartItemsContext'
+
 const Cart = () => {
-  const dispatch = useDispatch()
+  const { items, dispatch } = useContext(CartItemsContext)
 
-  const items = useSelector(state => state.cartItems)
-  useEffect(() => dispatch(cartItemsReceived()), [dispatch])
+  useEffect(() => actions.cartItemsReceived(dispatch), [dispatch])
 
-  const handleCheckoutCart = () => dispatch(cartCheckout())
+  const handleCheckoutCart = () => actions.cartCheckout(dispatch)
 
   return (
     <div className="cart">

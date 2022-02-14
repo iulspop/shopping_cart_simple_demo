@@ -25,14 +25,15 @@ const cartItemsReducer = (state, action) => {
   }
 }
 
-const actions = {
+const cartItemsActions = {
   cartItemsReceived: dispatch => {
     cartItemsAPI.getCartItems(items => dispatch({ type: 'CART_ITEMS_RECEIVED', payload: { items } }))
   },
-  cartItemAdded: (productId, dispatch) => {
-    cartItemsAPI.addCartItem(productId, ({ product, item }) =>
-      dispatch({ type: 'CART_ITEM_ADDED', payload: { product, item } })
-    )
+  cartItemAdded: (cartContextDispatch, productsContextDispatch, productId) => {
+    cartItemsAPI.addCartItem(productId, ({ product, item }) => {
+      cartContextDispatch({ type: 'CART_ITEM_ADDED', payload: { product, item } })
+      productsContextDispatch({ type: 'CART_ITEM_ADDED', payload: { product, item } })
+    })
   },
   cartCheckout: dispatch => {
     cartItemsAPI.checkoutCartItems(() => dispatch({ type: 'CART_CHECKOUT', payload: {} }))
@@ -44,7 +45,7 @@ const CartItemsProvider = ({ children }) => {
   return <CartItemsContext.Provider value={{ items, dispatch }}>{children}</CartItemsContext.Provider>
 }
 
-export { CartItemsContext, CartItemsProvider, actions }
+export { CartItemsContext, CartItemsProvider, cartItemsActions }
 
 /*
     - Wrap the App in two ContextProviders (Cart, Products)

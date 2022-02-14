@@ -1,21 +1,17 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useContext } from 'react'
 
-import { productsReceived } from '../redux/actions/productAction'
-
+import { ProductsContext, productsActions } from '../context/productsContext'
 import Product from './Product'
 
 const ProductList = () => {
-  const dispatch = useDispatch()
+  const { products, dispatch } = useContext(ProductsContext)
 
-  const productList = useSelector(state => state.products)
-
-  useEffect(() => dispatch(productsReceived()), [dispatch])
+  useEffect(() => productsActions.productsReceived(dispatch), [dispatch])
 
   return (
     <div className="product-listing">
       <h2>Products</h2>
-      {productList.map(product => (
+      {products.map(product => (
         <Product key={product._id} {...product} />
       ))}
     </div>

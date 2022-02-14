@@ -1,28 +1,26 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useContext } from 'react'
 
-import { productEdited } from '../redux/actions/productAction'
+import { ProductsContext, productsActions } from '../context/productsContext'
 
 const EditProductForm = ({ onCancelEdit, id, title, price, quantity }) => {
-  const dispatch = useDispatch()
+  const { dispatch } = useContext(ProductsContext)
 
   const [productName, setProductName] = useState(title)
   const [productPrice, setProductPrice] = useState(price)
   const [productQuantity, setProductQuantity] = useState(quantity)
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    dispatch(
-      productEdited(
-        id,
-        {
-          title: productName,
-          price: productPrice,
-          quantity: productQuantity,
-        },
-        onCancelEdit
-      )
+    productsActions.productEdited(
+      dispatch,
+      id,
+      {
+        title: productName,
+        price: productPrice,
+        quantity: productQuantity,
+      },
+      onCancelEdit
     )
   }
 
@@ -51,8 +49,10 @@ const EditProductForm = ({ onCancelEdit, id, title, price, quantity }) => {
         </div>
 
         <div className="actions form-actions">
-          <button className="button">Update</button>
-          <button className="button" onClick={onCancelEdit}>
+          <button className="button" type="submit">
+            Update
+          </button>
+          <button className="button" type="button" onClick={onCancelEdit}>
             Cancel
           </button>
         </div>

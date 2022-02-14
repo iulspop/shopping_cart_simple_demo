@@ -1,21 +1,19 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useContext } from 'react'
 
-import { productDeleted } from '../redux/actions/productAction'
-import { cartItemAdded } from '../redux/actions/cartItemsAction'
+import { ProductsContext, productsActions } from '../context/productsContext'
+import { CartItemsContext, cartItemsActions } from '../context/cartItemsContext'
 
 import EditProductForm from './EditProductForm'
 
 const Product = ({ _id, title, price, quantity }) => {
-  const dispatch = useDispatch()
+  const { dispatch: productsDispatch } = useContext(ProductsContext)
+  const { dispatch: cartDispatch } = useContext(CartItemsContext)
 
   const [isEdit, setIsEdit] = useState(false)
 
-  const handleDeleteProduct = async productID => {
-    dispatch(productDeleted(productID))
-  }
+  const handleDeleteProduct = productID => productsActions.productDeleted(productsDispatch, productID)
 
-  const handleAddToCart = id => dispatch(cartItemAdded(id))
+  const handleAddToCart = id => cartItemsActions.cartItemAdded(cartDispatch, productsDispatch, id)
 
   return (
     <div className="product">

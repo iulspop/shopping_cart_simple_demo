@@ -2,14 +2,14 @@ import { useEffect, useContext } from 'react'
 
 import CartItem from './CartItem'
 
-import { CartItemsContext, actions } from '../context/cartItemsContext'
+import { CartItemsContext, cartItemsActions } from '../context/cartItemsContext'
 
 const Cart = () => {
   const { items, dispatch } = useContext(CartItemsContext)
 
-  useEffect(() => actions.cartItemsReceived(dispatch), [dispatch])
+  useEffect(() => cartItemsActions.cartItemsReceived(dispatch), [dispatch])
 
-  const handleCheckoutCart = () => actions.cartCheckout(dispatch)
+  const handleCheckoutCart = () => cartItemsActions.cartCheckout(dispatch)
 
   return (
     <div className="cart">

@@ -37,20 +37,20 @@ export const cartItemsAPI = {
       .get('/api/cart')
       .then(response => response.data)
       .then(callback)
-      .catch(err => console.err(err))
+      .catch(err => console.error(err))
   },
   addCartItem: (productId, callback = () => {}) => {
     axios
       .post('/api/add-to-cart/', { productId })
       .then(response => response.data)
       .then(callback)
-      .catch(err => console.err(err))
+      .catch(err => console.error(err))
   },
   checkoutCartItems: (callback = () => {}) => {
     axios
       .post('/api/checkout')
       .then(response => response.data)
       .then(callback)
-      .catch(err => console.err(err))
+      .catch(err => console.error(err))
   },
 }

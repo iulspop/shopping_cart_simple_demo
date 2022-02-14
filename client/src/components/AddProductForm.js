@@ -1,28 +1,26 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useContext } from 'react'
 
-import { productAdded } from '../redux/actions/productAction'
+import { ProductsContext, productsActions } from '../context/productsContext'
 
 const AddProductForm = () => {
-  const dispatch = useDispatch()
+  const { dispatch } = useContext(ProductsContext)
   const [formIsVisible, setFormIsVisible] = useState(false)
 
   const [productName, setProductName] = useState('')
   const [productPrice, setProductPrice] = useState('')
   const [productQuantity, setProductQuantity] = useState('')
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    dispatch(
-      productAdded(
-        {
-          title: productName,
-          price: productPrice,
-          quantity: productQuantity,
-        },
-        clearForm
-      )
+    productsActions.productAdded(
+      dispatch,
+      {
+        title: productName,
+        price: productPrice,
+        quantity: productQuantity,
+      },
+      clearForm
     )
   }
 
@@ -63,8 +61,10 @@ const AddProductForm = () => {
         </div>
 
         <div className="actions form-actions">
-          <button className="button">Add</button>
-          <button className="button" onClick={clearForm}>
+          <button className="button" type="submit">
+            Add
+          </button>
+          <button className="button" type="button" onClick={clearForm}>
             Cancel
           </button>
         </div>
